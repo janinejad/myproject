@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}پلتفرم معرفی کسب‌وکارها{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-background text-gray-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Header / Navigation -->
+    <header class="bg-secondary text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-primary">کسب‌وکار من</a>
+            <nav class="space-x-4 space-x-reverse">
+                <a href="/businesses/" class="hover:text-primary transition">کسب‌وکارها</a>
+                <a href="/categories/" class="hover:text-primary transition">دسته‌بندی‌ها</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-6 border-t-4 border-primary">
+        <div class="container mx-auto px-4 text-center">
+            <p>© تمام حقوق برای پلتفرم محفوظ است.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
