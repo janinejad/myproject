@@ -1,37 +1,37 @@
 {% load static %}
 
-<div id="category-slider" class="relative max-w-7xl mx-auto px-4 my-8">
-    <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg md:text-xl font-bold text-secondary">دسته‌بندی‌های محبوب</h3>
+<section class="container mx-auto px-4 lg:px-8 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <span class="text-xs font-bold text-[#FF9933] uppercase">دسته‌بندی‌ها</span>
+            <h2 class="text-xl md:text-2xl font-black text-[#1A1A80] mt-0.5">دسته‌بندی‌های محبوب مشاغل</h2>
+        </div>
+        <!-- دکمه‌های ناوبری اسلایدر -->
         <div class="flex gap-2">
-            <button class="slider-prev bg-white border border-gray-200 text-secondary hover:bg-primary hover:text-white hover:border-primary w-8 h-8 rounded-lg shadow-sm flex items-center justify-center transition">❮</button>
-            <button class="slider-next bg-white border border-gray-200 text-secondary hover:bg-primary hover:text-white hover:border-primary w-8 h-8 rounded-lg shadow-sm flex items-center justify-center transition">❯</button>
+            <button class="slider-prev bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❮</button>
+            <button class="slider-next bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❯</button>
         </div>
     </div>
 
-    <div class="slider-track flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+    <!-- Track اسلایدر با قابلیت اسکرول نرم و مخفی‌سازی اسکرول‌بار فقط با تیلویند -->
+    <div id="category-slider" class="relative">
+        <div class="slider-track flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+            {% for cat in popular_categories %}
+            <a href="/categories/{{ cat.slug }}/"
+               class="snap-start w-[140px] md:w-[170px] flex-shrink-0 bg-white p-5 rounded-2xl border border-orange-100/80 hover:border-[#FF9933]/50 shadow-sm hover:shadow-xl hover:shadow-orange-500/5 transition duration-300 flex flex-col items-center text-center group">
 
-        <div class="snap-start w-[130px] md:w-[170px] flex-shrink-0 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition text-center cursor-pointer group">
-            <div class="w-12 h-12 bg-orange-100 text-primary rounded-full flex items-center justify-center mx-auto mb-2 text-xl group-hover:bg-primary group-hover:text-white transition">
-                🍔
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-100/60 text-[#FF9933] group-hover:bg-[#FF9933] group-hover:text-white flex items-center justify-center text-2xl mb-3 shadow-inner transition duration-300">
+                    {{ cat.icon|default:"🏢" }}
+                </div>
+
+                <h3 class="font-bold text-sm text-[#1A1A80] group-hover:text-[#FF9933] transition line-clamp-1">{{ cat.name }}</h3>
+                <span class="text-[11px] text-gray-400 mt-1">مشاهده کسب‌وکارها</span>
+            </a>
+            {% empty %}
+            <div class="w-full bg-white p-6 rounded-2xl border border-dashed border-gray-200 text-center text-gray-400 text-sm">
+                دسته‌بندی ثبت نشده است.
             </div>
-            <h4 class="font-bold text-sm text-gray-800 group-hover:text-secondary">رستوران و کافه</h4>
+            {% endfor %}
         </div>
-
-        <div class="snap-start w-[130px] md:w-[170px] flex-shrink-0 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition text-center cursor-pointer group">
-            <div class="w-12 h-12 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-2 text-xl group-hover:bg-secondary group-hover:text-white transition">
-                🔧
-            </div>
-            <h4 class="font-bold text-sm text-gray-800 group-hover:text-secondary">خدمات فنی</h4>
-        </div>
-
     </div>
-</div>
-
-<!-- JS Script for Category Slider Page -->
-<script src="{% static 'js/slider.js' %}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        new ReusableSlider('category-slider');
-    });
-</script>
+</section>

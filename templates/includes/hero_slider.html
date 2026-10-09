@@ -1,46 +1,37 @@
 {% load static %}
 
-<!-- Hero Slider Container -->
-<div id="hero-slider" class="relative w-full max-w-7xl mx-auto px-4 my-6 group">
-    <!-- Slider Track (Hidden scrollbar via pure Tailwind) -->
-    <div class="slider-track flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-2xl shadow-xl [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+<section class="container mx-auto px-4 lg:px-8 my-6">
+    <div id="hero-slider" class="relative group">
+        <div class="slider-track flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-3xl shadow-xl [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
 
-        <!-- Slide 1 -->
-        <div class="snap-start min-w-full flex-shrink-0 relative h-[300px] md:h-[400px] bg-secondary text-white flex items-center justify-center p-6 text-center">
-            <div class="max-w-xl">
-                <h2 class="text-2xl md:text-4xl font-bold mb-3 text-primary">پلتفرم جامع معرفی کسب‌وکارها</h2>
-                <p class="text-gray-200 text-sm md:text-base mb-6">بهترین مشاغل و خدمات شهر خود را به راحتی پیدا کنید.</p>
-                <a href="/businesses/" class="inline-block bg-primary hover:bg-primary-hover text-white font-bold py-2.5 px-6 rounded-xl transition">مشاهده همه</a>
+            <!-- اسلاید ۱ -->
+            <div class="snap-start min-w-full flex-shrink-0 relative h-[260px] sm:h-[340px] bg-gradient-to-r from-[#1A1A80] to-indigo-900 text-white flex items-center justify-center p-6 text-center">
+                <div class="max-w-2xl space-y-3">
+                    <span class="inline-block bg-[#FF9933]/20 border border-[#FF9933]/40 text-[#FF9933] text-xs font-bold px-3 py-1 rounded-full">مرجع جامع مشاغل شهری</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight">بهترین کسب‌وکارها و خدمات را آنلاین پیدا کنید</h2>
+                    <p class="text-gray-200 text-xs sm:text-sm">دسترسی سریع به هزاران کسب‌وکار، کالا و خدمات معتبر</p>
+                    <div class="pt-2">
+                        <a href="/businesses/" class="inline-block bg-[#FF9933] hover:bg-amber-600 text-white text-xs sm:text-sm font-bold py-2.5 px-6 rounded-xl shadow-lg transition">مشاهده همه مشاغل</a>
+                    </div>
+                </div>
             </div>
+
+            <!-- اسلاید ۲ -->
+            <div class="snap-start min-w-full flex-shrink-0 relative h-[260px] sm:h-[340px] bg-gradient-to-r from-slate-900 to-slate-800 text-white flex items-center justify-center p-6 text-center">
+                <div class="max-w-2xl space-y-3">
+                    <span class="inline-block bg-orange-500/20 border border-orange-400/40 text-orange-400 text-xs font-bold px-3 py-1 rounded-full">ویژه صاحبان مشاغل</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight">کسب‌وکار خود را رایگان معرفی کنید</h2>
+                    <p class="text-gray-300 text-xs sm:text-sm">مشتریان جدید پیدا کنید و فروش خود را افزایش دهید</p>
+                    <div class="pt-2">
+                        <a href="/add-business/" class="inline-block bg-[#FF9933] hover:bg-amber-600 text-white text-xs sm:text-sm font-bold py-2.5 px-6 rounded-xl shadow-lg transition">+ ثبت آنلاین کسب‌وکار</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Slide 2 -->
-        <div class="snap-start min-w-full flex-shrink-0 relative h-[300px] md:h-[400px] bg-slate-900 text-white flex items-center justify-center p-6 text-center">
-            <div class="max-w-xl">
-                <h2 class="text-2xl md:text-4xl font-bold mb-3 text-white">ثبت رایگان کسب‌وکار</h2>
-                <p class="text-gray-300 text-sm md:text-base mb-6">کسب‌وکار خود را معرفی کنید و مشتریان جدید جذب نمایید.</p>
-                <a href="/add-business/" class="inline-block bg-primary hover:bg-primary-hover text-white font-bold py-2.5 px-6 rounded-xl transition">ثبت آنلاین</a>
-            </div>
-        </div>
-
+        <!-- فلش‌های کنترل اسلایدر -->
+        <button class="slider-prev absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1A1A80] w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition opacity-80 hover:opacity-100 z-10">❮</button>
+        <button class="slider-next absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1A1A80] w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition opacity-80 hover:opacity-100 z-10">❯</button>
     </div>
-
-    <!-- Navigation Buttons -->
-    <button class="slider-prev absolute right-6 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-secondary p-3 rounded-full shadow-md transition opacity-80 hover:opacity-100 z-10">
-        ❮
-    </button>
-    <button class="slider-next absolute left-6 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-secondary p-3 rounded-full shadow-md transition opacity-80 hover:opacity-100 z-10">
-        ❯
-    </button>
-</div>
-
-<!-- JS Script for Home Page -->
-<script src="{% static 'js/slider.js' %}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        new ReusableSlider('hero-slider', {
-            autoPlay: true,
-            intervalTime: 4000
-        });
-    });
-</script>
+</section>
