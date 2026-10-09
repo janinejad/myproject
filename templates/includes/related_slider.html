@@ -1,0 +1,40 @@
+{% load static %}
+
+<div id="related-businesses-slider" class="relative max-w-7xl mx-auto px-4 my-8">
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="text-lg md:text-xl font-bold text-secondary">کسب‌وکارهای مرتبط</h3>
+            <p class="text-xs text-gray-500 mt-1">پیشنهادهای مشابه این دسته</p>
+        </div>
+        <div class="flex gap-2">
+            <button class="slider-prev bg-white border border-gray-200 text-secondary hover:bg-primary hover:text-white hover:border-primary w-8 h-8 rounded-lg shadow-sm flex items-center justify-center transition">❮</button>
+            <button class="slider-next bg-white border border-gray-200 text-secondary hover:bg-primary hover:text-white hover:border-primary w-8 h-8 rounded-lg shadow-sm flex items-center justify-center transition">❯</button>
+        </div>
+    </div>
+
+    <div class="slider-track flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+
+        <div class="snap-start w-[250px] md:w-[280px] flex-shrink-0 bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition">
+            <div class="h-36 bg-gray-200 relative">
+                <span class="absolute top-3 right-3 bg-primary text-white text-xs px-2 py-0.5 rounded font-bold">ویژه</span>
+            </div>
+            <div class="p-4">
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-gray-800 text-base">رستوران سنتی</h4>
+                    <span class="text-amber-500 text-xs font-bold">★ ۴.۸</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-3">تهران، خیابان ولیعصر</p>
+                <a href="#" class="block text-center w-full py-2 bg-secondary text-white rounded-lg text-xs hover:bg-secondary-hover transition">مشاهده</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- JS Script for Business Detail Page -->
+<script src="{% static 'js/slider.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new ReusableSlider('related-businesses-slider');
+    });
+</script>

@@ -1,0 +1,37 @@
+{% load static %}
+
+<div id="category-slider" class="relative max-w-7xl mx-auto px-4 my-8">
+    <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg md:text-xl font-bold text-secondary">دسته‌بندی‌های محبوب</h3>
+        <div class="flex gap-2">
+            <button class="slider-prev bg-white border border-gray-200 text-secondary hover:bg-primary hover:text-white hover:border-primary w-8 h-8 rounded-lg shadow-sm flex items-center justify-center transition">❮</button>
+            <button class="slider-next bg-white border border-gray-200 text-secondary hover:bg-primary hover:text-white hover:border-primary w-8 h-8 rounded-lg shadow-sm flex items-center justify-center transition">❯</button>
+        </div>
+    </div>
+
+    <div class="slider-track flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+
+        <div class="snap-start w-[130px] md:w-[170px] flex-shrink-0 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition text-center cursor-pointer group">
+            <div class="w-12 h-12 bg-orange-100 text-primary rounded-full flex items-center justify-center mx-auto mb-2 text-xl group-hover:bg-primary group-hover:text-white transition">
+                🍔
+            </div>
+            <h4 class="font-bold text-sm text-gray-800 group-hover:text-secondary">رستوران و کافه</h4>
+        </div>
+
+        <div class="snap-start w-[130px] md:w-[170px] flex-shrink-0 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition text-center cursor-pointer group">
+            <div class="w-12 h-12 bg-blue-100 text-secondary rounded-full flex items-center justify-center mx-auto mb-2 text-xl group-hover:bg-secondary group-hover:text-white transition">
+                🔧
+            </div>
+            <h4 class="font-bold text-sm text-gray-800 group-hover:text-secondary">خدمات فنی</h4>
+        </div>
+
+    </div>
+</div>
+
+<!-- JS Script for Category Slider Page -->
+<script src="{% static 'js/slider.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new ReusableSlider('category-slider');
+    });
+</script>

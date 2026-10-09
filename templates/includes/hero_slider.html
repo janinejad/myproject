@@ -1,0 +1,46 @@
+{% load static %}
+
+<!-- Hero Slider Container -->
+<div id="hero-slider" class="relative w-full max-w-7xl mx-auto px-4 my-6 group">
+    <!-- Slider Track (Hidden scrollbar via pure Tailwind) -->
+    <div class="slider-track flex overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-2xl shadow-xl [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+
+        <!-- Slide 1 -->
+        <div class="snap-start min-w-full flex-shrink-0 relative h-[300px] md:h-[400px] bg-secondary text-white flex items-center justify-center p-6 text-center">
+            <div class="max-w-xl">
+                <h2 class="text-2xl md:text-4xl font-bold mb-3 text-primary">پلتفرم جامع معرفی کسب‌وکارها</h2>
+                <p class="text-gray-200 text-sm md:text-base mb-6">بهترین مشاغل و خدمات شهر خود را به راحتی پیدا کنید.</p>
+                <a href="/businesses/" class="inline-block bg-primary hover:bg-primary-hover text-white font-bold py-2.5 px-6 rounded-xl transition">مشاهده همه</a>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="snap-start min-w-full flex-shrink-0 relative h-[300px] md:h-[400px] bg-slate-900 text-white flex items-center justify-center p-6 text-center">
+            <div class="max-w-xl">
+                <h2 class="text-2xl md:text-4xl font-bold mb-3 text-white">ثبت رایگان کسب‌وکار</h2>
+                <p class="text-gray-300 text-sm md:text-base mb-6">کسب‌وکار خود را معرفی کنید و مشتریان جدید جذب نمایید.</p>
+                <a href="/add-business/" class="inline-block bg-primary hover:bg-primary-hover text-white font-bold py-2.5 px-6 rounded-xl transition">ثبت آنلاین</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button class="slider-prev absolute right-6 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-secondary p-3 rounded-full shadow-md transition opacity-80 hover:opacity-100 z-10">
+        ❮
+    </button>
+    <button class="slider-next absolute left-6 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-secondary p-3 rounded-full shadow-md transition opacity-80 hover:opacity-100 z-10">
+        ❯
+    </button>
+</div>
+
+<!-- JS Script for Home Page -->
+<script src="{% static 'js/slider.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new ReusableSlider('hero-slider', {
+            autoPlay: true,
+            intervalTime: 4000
+        });
+    });
+</script>
