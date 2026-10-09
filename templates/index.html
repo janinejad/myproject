@@ -70,10 +70,16 @@
         });
 
         // فعال‌سازی اسلایدر دسته‌بندی‌های محبوب
-        new ReusableSlider('category-slider');
+        new ReusableSlider('category-slider', {
+            autoPlay: true,
+            intervalTime: 4000,
+        });
 
         // فعال‌سازی اسلایدر کسب‌وکارهای برتر
-        new ReusableSlider('business-slider');
+        new ReusableSlider('business-slider', {
+            autoPlay: true,
+            intervalTime: 4000
+        });
     });
 </script>
 

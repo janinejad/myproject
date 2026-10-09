@@ -1,10 +1,9 @@
 from django.contrib import admin
-# from import_export.admin import ImportExportModelAdmin
 from apps.categories.models import Category
-
+from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 @admin.register(Category)
-class ProvinceAdmin(admin.ModelAdmin):
+class ProvinceAdmin(ImportExportModelAdmin):
     class Meta:
         model = Category

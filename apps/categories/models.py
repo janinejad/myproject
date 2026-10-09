@@ -27,6 +27,8 @@ class Category(models.Model):
     class Meta:
         ordering = ['order', 'name']
         verbose_name_plural = 'Categories'
+    # def get_abs_url(self):
+    #     return reverse(":products-search", kwargs={'cat_slug': self.slug})
 
     def __str__(self):
         return self.name

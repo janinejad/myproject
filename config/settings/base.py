@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_spectacular',
     'mptt',
-
+    'import_export',
     # Local Apps
     'apps.core',
     'apps.accounts',
@@ -87,3 +87,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # تنظیمات پیش‌فرض برای Primary Keyها
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REDIS_URL = 'redis://127.0.0.1:6379/0'
+JALALI_DATE_DEFAULTS = {
+    # if change it to true then all dates of the list_display will convert to the Jalali.
+    'LIST_DISPLAY_AUTO_CONVERT': False,
+    'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            'admin/js/django_jalali.min.js',
+        ],
+        'css': {
+            'all': [
+                'admin/css/django_jalali.min.css',
+            ]
+        }
+    },
+}

@@ -16,7 +16,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # دریافت دسته‌بندی‌های اصلی
-        context['popular_categories'] = Category.objects.filter(is_active=True, parent=None)[:6]
+        context['popular_categories'] = Category.objects.filter(is_active=True, parent=None)[:15]
         # دریافت برترین کسب‌وکارها از لایه سرویس
         context['top_businesses'] = BusinessService.get_approved_businesses()[:6]
         return context

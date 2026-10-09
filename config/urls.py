@@ -16,6 +16,7 @@ router.register(r'businesses', BusinessViewSet, basename='api-businesses')
 urlpatterns = [
     # ۱. صفحات وب فرانت‌اند (Website Routes)
     path('', HomeView.as_view(), name='home'),
+    path('', include('apps.categories.urls')),
     path('businesses/<slug:slug>/', BusinessDetailView.as_view(), name='business_detail'),
 
     # ۲. پنل مدیریت

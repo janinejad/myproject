@@ -1,67 +1,64 @@
 {% load static %}
 
-<section class="container mx-auto px-4 lg:px-8 py-8">
+<!-- شناسه id="business-slider" به تگ section اصلی منتقل شد -->
+<section id="business-slider" class="container mx-auto px-4 lg:px-8 py-8 relative">
     <div class="flex justify-between items-center mb-6">
         <div>
             <span class="text-xs font-bold text-[#FF9933] uppercase">پیشنهاد ویژه</span>
             <h2 class="text-xl md:text-2xl font-black text-[#1A1A80] mt-0.5">برترین کسب‌وکارهای تأییدشده</h2>
         </div>
         <div class="flex gap-2">
-            <button class="slider-prev bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❮</button>
-            <button class="slider-next bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❯</button>
+            <button type="button" class="slider-prev bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❮</button>
+            <button type="button" class="slider-next bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❯</button>
         </div>
     </div>
 
-    <div id="business-slider" class="relative">
-        <div class="slider-track flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
-            {% for business in top_businesses %}
-            <div class="snap-start w-[270px] md:w-[320px] flex-shrink-0 bg-white rounded-2xl border border-orange-100/80 shadow-sm hover:shadow-xl hover:border-[#FF9933]/40 transition duration-300 flex flex-col overflow-hidden group">
+    <div class="slider-track flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
+        {% for business in top_businesses %}
+        <div class="snap-start w-[270px] md:w-[320px] flex-shrink-0 bg-white rounded-2xl border border-orange-100/80 shadow-sm hover:shadow-xl hover:border-[#FF9933]/40 transition duration-300 flex flex-col overflow-hidden group">
 
-                <!-- تصویر کاور و لوگو -->
-                <div class="h-40 bg-slate-100 relative overflow-hidden">
-                    {% if business.cover_image %}
-                        <img src="{{ business.cover_image.url }}" alt="{{ business.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    {% else %}
-                        <div class="w-full h-full bg-gradient-to-tr from-slate-200 to-amber-50"></div>
-                    {% endif %}
+            <div class="h-40 bg-slate-100 relative overflow-hidden">
+                {% if business.cover_image %}
+                    <img src="{{ business.cover_image.url }}" alt="{{ business.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                    <div class="w-full h-full bg-gradient-to-tr from-slate-200 to-amber-50"></div>
+                {% endif %}
 
-                    <div class="absolute top-3 right-3">
-                        <span class="bg-white/90 backdrop-blur-md text-[#1A1A80] text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
-                            {{ business.category.name }}
-                        </span>
-                    </div>
-
-                    <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-xl border-2 border-white bg-white shadow-md overflow-hidden">
-                        <img src="{{ business.logo.url|default:'/static/images/default-logo.png' }}" class="w-full h-full object-cover">
-                    </div>
+                <div class="absolute top-3 right-3">
+                    <span class="bg-white/90 backdrop-blur-md text-[#1A1A80] text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
+                        {{ business.category.name }}
+                    </span>
                 </div>
 
-                <!-- توضیحات کارت -->
-                <div class="p-5 pt-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-base font-bold text-[#1A1A80] group-hover:text-[#FF9933] transition line-clamp-1">
-                            {{ business.title }}
-                        </h3>
-                        <p class="text-gray-500 text-xs mt-1.5 line-clamp-2 leading-relaxed">
-                            {{ business.description }}
-                        </p>
-                    </div>
+                <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-xl border-2 border-white bg-white shadow-md overflow-hidden">
+                    <img src="{{ business.logo.url|default:'/static/images/default-logo.png' }}" class="w-full h-full object-cover">
+                </div>
+            </div>
 
-                    <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                        <span class="truncate max-w-[170px]">📍 {{ business.address|truncatechars:22 }}</span>
-                        <a href="/businesses/{{ business.slug }}/" class="font-bold text-[#1A1A80] hover:text-[#FF9933] transition flex items-center gap-0.5">
-                            مشاهده
-                            <span>➔</span>
-                        </a>
-                    </div>
+            <div class="p-5 pt-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-[#1A1A80] group-hover:text-[#FF9933] transition line-clamp-1">
+                        {{ business.title }}
+                    </h3>
+                    <p class="text-gray-500 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+                        {{ business.description }}
+                    </p>
                 </div>
 
+                <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+                    <span class="truncate max-w-[170px]">📍 {{ business.address|truncatechars:22 }}</span>
+                    <a href="/businesses/{{ business.slug }}/" class="font-bold text-[#1A1A80] hover:text-[#FF9933] transition flex items-center gap-0.5">
+                        مشاهده
+                        <span>➔</span>
+                    </a>
+                </div>
             </div>
-            {% empty %}
-            <div class="w-full bg-white p-8 rounded-2xl border border-dashed border-gray-200 text-center text-gray-400 text-sm">
-                کسب‌وکاری جهت نمایش وجود ندارد.
-            </div>
-            {% endfor %}
+
         </div>
+        {% empty %}
+        <div class="w-full bg-white p-8 rounded-2xl border border-dashed border-gray-200 text-center text-gray-400 text-sm">
+            کسب‌وکاری جهت نمایش وجود ندارد.
+        </div>
+        {% endfor %}
     </div>
 </section>
