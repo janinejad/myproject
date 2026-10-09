@@ -9,10 +9,6 @@ venv/
 /db.sqlite3
 db.sqlite3/
 /db.sqlite3/
-/media
-media/
-/static
-static/
 /static_cdn
 static_cdn/
 /public
