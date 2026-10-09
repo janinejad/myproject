@@ -7,13 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#FDF8F3', // رنگ پس‌زمینه
-        primary: {
-          DEFAULT: '#FF9933',  // رنگ اول (نارنجی)
-          hover: '#E68524',
+        bgMain: '#FDF8F3',
+        brandPrimary: {
+          DEFAULT: '#FF9933',
+          hover: '#e08324',
         },
-        secondary: {
-          DEFAULT: '#1A1A80',  // رنگ دوم (سرمه‌ای)
+        brandSecondary: {
+          DEFAULT: '#1A1A80',
           hover: '#131366',
         }
       },

@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from apps.core.models import TimeStampedModel
 
 class UserRole(models.TextChoices):
     USER = 'user', 'کاربر عادی'
@@ -14,11 +13,9 @@ class User(AbstractUser):
     role = models.CharField(max_length=20, choices=UserRole.choices, default=UserRole.USER)
     is_verified = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'phone_number']
-
-class UserProfile(TimeStampedModel):
+class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     bio = models.TextField(blank=True)
     city = models.CharField(max_length=100, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)

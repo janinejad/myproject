@@ -4,8 +4,40 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Business
 from .serializers import BusinessCreateSerializer, BusinessDetailSerializer
 from .services import BusinessService
+from django.views.generic import TemplateView, DetailView
+
+from ..categories.models import Category
 
 
+class HomeView(TemplateView):
+    """View مربوط به صفحه اصلی سایت"""
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # دریافت دسته‌بندی‌های اصلی
+        context['popular_categories'] = Category.objects.filter(is_active=True, parent=None)[:6]
+        # دریافت برترین کسب‌وکارها از لایه سرویس
+        context['top_businesses'] = BusinessService.get_approved_businesses()[:6]
+        return context
+
+
+class BusinessDetailView(DetailView):
+    """View مربوط به صفحه اختصاصی کسب‌وکار"""
+    template_name = 'businesses/business_detail.html'
+    context_object_name = 'business'
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get('slug')
+        ip = self.request.META.get('REMOTE_ADDR')
+        # دریافت جزئیات و ثبت غیرهمزمان بازدید
+        return BusinessService.get_business_detail(slug_or_id=slug, request_ip=ip)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # دریافت کسب‌وکارهای مرتبط
+        context['related_businesses'] = BusinessService.get_related_businesses(self.object)
+        return context
 class BusinessViewSet(viewsets.ModelViewSet):
     queryset = Business.objects.filter(is_active=True)
     serializer_class = BusinessDetailSerializer

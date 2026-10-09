@@ -3,34 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}پلتفرم معرفی کسب‌وکارها{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <title>{% block title %}پلتفرم معرفی و جستجوی کسب‌وکارها{% endblock %}</title>
+    <!-- فونت وزیرمتن -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgMain: '#FDF8F3',
+                        brandPrimary: {
+                            DEFAULT: '#FF9933',
+                            hover: '#e08324',
+                        },
+                        brandSecondary: {
+                            DEFAULT: '#1A1A80',
+                            hover: '#121260',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDF8F3;
+        }
+    </style>
 </head>
-<body class="bg-background text-gray-800 font-sans min-h-screen flex flex-col">
+<body class="text-gray-800 font-sans min-h-screen flex flex-col antialiased selection:bg-[#FF9933] selection:text-white">
 
-    <!-- Header / Navigation -->
-    <header class="bg-secondary text-white shadow-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-primary">کسب‌وکار من</a>
-            <nav class="space-x-4 space-x-reverse">
-                <a href="/businesses/" class="hover:text-primary transition">کسب‌وکارها</a>
-                <a href="/categories/" class="hover:text-primary transition">دسته‌بندی‌ها</a>
-            </nav>
+<!-- Navbar / Header (روشن، شیشه‌ای و مدرن) -->
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-orange-100/60 shadow-sm transition-all">
+    <div class="container mx-auto px-4 lg:px-8 h-20 flex justify-between items-center gap-4">
+
+        <!-- Logo & Brand -->
+        <a href="/" class="flex items-center gap-3 group shrink-0">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF9933] to-amber-300 flex items-center justify-center text-white text-xl font-black shadow-md shadow-orange-500/20 group-hover:scale-105 transition">
+                ک
+            </div>
+            <div class="flex flex-col">
+                <span class="text-xl font-extrabold text-[#1A1A80] tracking-tight">آسان‌گزین</span>
+                <span class="text-[10px] text-gray-400 font-medium -mt-1">سامانه جامع معرفی کسب‌وکار</span>
+            </div>
+        </a>
+
+        <!-- Search Bar in Header (دسکتاپ) -->
+        <div class="hidden md:flex flex-1 max-w-lg mx-6">
+            <form action="/search/" method="GET" class="w-full relative flex items-center">
+                <input type="text" name="q" placeholder="جستجوی کسب‌وکار، کالا یا خدمت..."
+                       class="w-full bg-[#FDF8F3] text-gray-800 text-sm py-2.5 pr-10 pl-4 rounded-full border border-orange-200/80 focus:outline-none focus:border-[#FF9933] focus:bg-white focus:ring-4 focus:ring-orange-500/10 transition-all">
+                <span class="absolute right-3.5 text-gray-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </span>
+            </form>
         </div>
-    </header>
+        <!-- Nav Actions -->
+        <nav class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            <a href="/businesses/"
+               class="hidden sm:inline-block text-sm font-semibold text-gray-600 hover:text-[#1A1A80] px-3 py-2 rounded-lg hover:bg-orange-50 transition">
+                کسب‌وکارها
+            </a>
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        {% block content %}{% endblock %}
-    </main>
+            {% if user.is_authenticated %}
+                <a href="/profile/"
+                   class="bg-[#1A1A80] text-white text-xs sm:text-sm font-bold px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-xl hover:bg-[#121260] shadow-sm hover:shadow-md transition whitespace-nowrap">
+                    پنل کاربری
+                </a>
+            {% else %}
+                <a href="/login/"
+                   class="text-xs sm:text-sm font-bold text-[#1A1A80] hover:text-[#FF9933] px-2 py-2 transition whitespace-nowrap shrink-0">
+                    ورود
+                </a>
+                <a href="/register/"
+                   class="bg-[#FF9933] text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl hover:bg-[#e08324] shadow-md shadow-orange-500/20 transition whitespace-nowrap shrink-0 flex items-center justify-center">
+                    <!-- در موبایل فقط "ثبت‌نام" و در تبلت/دسکتاپ عنوان کامل نمایش داده می‌شود -->
+                    <span class="sm:hidden">ثبت‌نام</span>
+                    <span class="hidden sm:inline">ثبت‌نام / ثبت کسب‌وکار</span>
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
 
-    <!-- Footer -->
-    <footer class="bg-secondary text-white py-6 border-t-4 border-primary">
-        <div class="container mx-auto px-4 text-center">
-            <p>© تمام حقوق برای پلتفرم محفوظ است.</p>
+<!-- Main Content -->
+<main class="flex-grow">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer (روشن و خلوت با آکسان‌های سرمه‌ای و نارنجی) -->
+<footer class="bg-white border-t border-orange-100/80 mt-20 pt-14 pb-8">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-gray-100">
+            <!-- Col 1 -->
+            <div class="space-y-4 md:col-span-1">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-[#FF9933] flex items-center justify-center text-white font-bold">
+                        ک
+                    </div>
+                    <span class="text-lg font-extrabold text-[#1A1A80]">آسان‌گزین</span>
+                </div>
+                <p class="text-sm text-gray-500 leading-relaxed">
+                    پلتفرم هوشمند معرفی، جستجو و ارتباط مستقیم با بهترین کسب‌وکارها، کالاها و خدمات سراسر کشور.
+                </p>
+            </div>
+
+            <!-- Col 2 -->
+            <div>
+                <h4 class="font-bold text-[#1A1A80] mb-4 text-sm">دسترسی سریع</h4>
+                <ul class="space-y-2.5 text-sm text-gray-600">
+                    <li><a href="/businesses/" class="hover:text-[#FF9933] transition">لیست کسب‌وکارها</a></li>
+                    <li><a href="/categories/" class="hover:text-[#FF9933] transition">دسته‌بندی‌های مشاغل</a></li>
+                    <li><a href="/add-business/" class="hover:text-[#FF9933] transition">ثبت رایگان کسب‌وکار</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3 -->
+            <div>
+                <h4 class="font-bold text-[#1A1A80] mb-4 text-sm">راهنما و قوانین</h4>
+                <ul class="space-y-2.5 text-sm text-gray-600">
+                    <li><a href="/about/" class="hover:text-[#FF9933] transition">درباره ما</a></li>
+                    <li><a href="/privacy/" class="hover:text-[#FF9933] transition">حریم خصوصی</a></li>
+                    <li><a href="/contact/" class="hover:text-[#FF9933] transition">تماس با پشتیبانی</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4 -->
+            <div>
+                <h4 class="font-bold text-[#1A1A80] mb-4 text-sm">صاحب کسب‌وکار هستید؟</h4>
+                <p class="text-xs text-gray-500 mb-4 leading-relaxed">کسب‌وکار و محصولات خود را کاملاً رایگان ثبت کنید و
+                    در معرض دید هزاران مشتری قرار بگیرید.</p>
+                <a href="/add-business/"
+                   class="inline-flex items-center justify-center w-full bg-[#1A1A80] text-white text-xs font-bold py-3 rounded-xl hover:bg-[#121260] transition shadow-sm">
+                    + ثبت کسب‌وکار شما
+                </a>
+            </div>
         </div>
-    </footer>
+
+        <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+            <p>© تمامی حقوق مادی و معنوی برای پلتفرم آسان‌گزین محفوظ است.</p>
+            <div class="flex items-center gap-4">
+                <span class="hover:text-gray-600 cursor-pointer">تلگرام</span>
+                <span class="hover:text-gray-600 cursor-pointer">اینستاگرام</span>
+                <span class="hover:text-gray-600 cursor-pointer">لینکدین</span>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

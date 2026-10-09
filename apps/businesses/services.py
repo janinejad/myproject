@@ -1,48 +1,30 @@
-from django.db import transaction
-from django.utils.text import slugify
-from .models import Business, BusinessStatus
+from apps.businesses.models import Business, BusinessStatus
+from apps.analytics.services import AnalyticsService
 
 
 class BusinessService:
     @staticmethod
-    @transaction.atomic
-    def create_business(*, owner, title, category, description, address, phone="", mobile="", cover_image=None,
-                        logo=None):
-        """
-        منطق ثبت کسب‌وکار جدید - مشترک بین API و Web View
-        """
-        slug = slugify(title, allow_unicode=True)
+    def get_approved_businesses():
+        return Business.objects.filter(status=BusinessStatus.APPROVED, is_active=True).select_related('category')
 
-        # اطمینان از یکتا بودن slug
-        base_slug = slug
-        counter = 1
-        while Business.objects.filter(slug=slug).exists():
-            slug = f"{base_slug}-{counter}"
-            counter += 1
+    @staticmethod
+    def get_business_detail(slug_or_id, request_ip=None):
+        business = Business.objects.prefetch_related(
+            'working_hours', 'social_links', 'offers__catalog_item', 'comments__replies'
+        ).get(slug=slug_or_id, status=BusinessStatus.APPROVED)
 
-        business = Business.objects.create(
-            owner=owner,
-            title=title,
-            slug=slug,
-            category=category,
-            description=description,
-            address=address,
-            phone=phone,
-            mobile=mobile,
-            cover_image=cover_image,
-            logo=logo,
-            status=BusinessStatus.PENDING
-        )
+        # ثبت غیرهمزمان بازدید
+        if request_ip:
+            AnalyticsService.record_view(business.id, request_ip)
 
-        # در صورت نیاز: ارسال نوتيفیکیشن به مدیر یا اجرای رویدادهای جانبی
         return business
 
     @staticmethod
-    def approve_business(business_id: int, admin_user):
+    def get_related_businesses(business, limit=4):
         """
-        تأیید کسب‌وکار توسط مدیر
+        دریافت کسب‌وکارهای مرتبط بر اساس دسته‌بندی و زیردسته‌بندی مشترک
         """
-        business = Business.objects.get(id=business_id)
-        business.status = BusinessStatus.APPROVED
-        business.save()
-        return business
+        return Business.objects.filter(
+            status=BusinessStatus.APPROVED,
+            category=business.category
+        ).exclude(id=business.id)[:limit]

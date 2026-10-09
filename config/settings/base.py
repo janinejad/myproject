@@ -86,3 +86,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # تنظیمات پیش‌فرض برای Primary Keyها
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+REDIS_URL = 'redis://127.0.0.1:6379/0'
