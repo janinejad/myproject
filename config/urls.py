@@ -7,6 +7,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from apps.businesses.views import HomeView, BusinessDetailView
 from apps.businesses.api.views import BusinessViewSet
+from apps.search.views import live_search_api
 
 # روتر مربوط به REST API
 router = DefaultRouter()
@@ -24,6 +25,7 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/v1/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/v1/search/live/', live_search_api, name='api_live_search'),
 ]
 
 if settings.DEBUG:

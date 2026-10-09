@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from apps.search.services import IntelligentSearchService
 
-# Create your views here.
+def live_search_api(request):
+    query = request.GET.get('q', '')
+    results = IntelligentSearchService.live_search(query)
+    return JsonResponse(results)
