@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from apps.categories.models import Category
-
+from django.urls import reverse
 
 class BusinessStatus(models.TextChoices):
     PENDING = 'pending', 'در انتظار بررسی'
@@ -37,6 +37,9 @@ class Business(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('business_detail', kwargs={'slug': self.slug})
 
 
 class BusinessWorkingHour(models.Model):

@@ -1,5 +1,6 @@
 from django.urls import path
-app_name = 'categories'
-urlpatterns = [
+from .views import CategoryDetailView
 
+urlpatterns = [
+    path('categories/<slug:slug>/', CategoryDetailView.as_view(), name='category_detail'),
 ]

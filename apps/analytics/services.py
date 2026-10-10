@@ -4,7 +4,7 @@ from django.db.models import F
 
 
 
-r = redis.Redis.from_url(settings.REDIS_URL)
+r = redis.Redis.from_url(settings.REDIS_URL,protocol=2)
 
 
 class AnalyticsService:

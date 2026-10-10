@@ -14,15 +14,9 @@ router = DefaultRouter()
 router.register(r'businesses', BusinessViewSet, basename='api-businesses')
 
 urlpatterns = [
-    # ۱. صفحات وب فرانت‌اند (Website Routes)
-    path('', HomeView.as_view(), name='home'),
+    path('', include('apps.businesses.urls')),
     path('', include('apps.categories.urls')),
-    path('businesses/<slug:slug>/', BusinessDetailView.as_view(), name='business_detail'),
-
-    # ۲. پنل مدیریت
     path('admin/', admin.site.urls),
-
-    # ۳. مسیرهای REST API (مخصوص اپلیکیشن موبایل و React/Flutter در آینده)
     path('api/v1/', include(router.urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/v1/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

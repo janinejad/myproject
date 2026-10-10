@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto px-4 lg:px-8 py-8">
+    <!-- هدر دسته‌بندی -->
+    <div class="bg-white p-6 rounded-3xl border border-orange-100 shadow-sm mb-8 flex items-center gap-4">
+        <div class="w-16 h-16 rounded-2xl bg-orange-100 text-[#FF9933] flex items-center justify-center text-3xl overflow-hidden shrink-0">
+            {% if category.image %}
+                <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-full h-full object-cover">
+            {% else %}
+                <span>{{ category.icon|default:"📁" }}</span>
+            {% endif %}
+        </div>
+        <div>
+            <h1 class="text-2xl font-black text-[#1A1A80]">{{ category.name }}</h1>
+            <p class="text-xs text-gray-500 mt-1">مجموعه کسب‌وکارها و خدمات ثبت‌شده در این دسته</p>
+        </div>
+    </div>
+
+    <!-- زیردسته‌ها (در صورت وجود) -->
+    {% if category.children.all %}
+    <div class="mb-8">
+        <h3 class="text-sm font-bold text-[#1A1A80] mb-3">زیردسته‌ها</h3>
+        <div class="flex flex-wrap gap-2">
+            {% for child in category.children.all %}
+            <a href="{{ child.get_absolute_url }}" class="bg-white px-4 py-2 rounded-xl border border-gray-200 text-xs font-bold text-[#1A1A80] hover:border-[#FF9933] hover:text-[#FF9933] transition">
+                {{ child.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- لیست کسب‌وکارهای این دسته‌بندی (۴ ستون در دسکتاپ با lg:grid-cols-4) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for business in businesses %}
+        <a href="{{ business.get_absolute_url }}" class="bg-white rounded-2xl border border-orange-100 shadow-sm hover:shadow-xl hover:border-[#FF9933]/50 transition duration-300 overflow-hidden flex flex-col group">
+            <div class="h-40 bg-slate-100 relative overflow-hidden">
+                {% if business.cover_image %}
+                    <img src="{{ business.cover_image.url }}" alt="{{ business.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                    <div class="w-full h-full bg-gradient-to-tr from-slate-200 to-amber-50"></div>
+                {% endif %}
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-black text-[#1A1A80] group-hover:text-[#FF9933] transition text-base line-clamp-1">{{ business.title }}</h3>
+                    <p class="text-xs text-gray-600 mt-1.5 line-clamp-2 leading-relaxed">{{ business.description }}</p>
+                </div>
+
+                <div class="mt-5 pt-3 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500">
+                    <span class="truncate max-w-[140px]">📍 {{ business.city|default:"شهر نامشخص" }}</span>
+                    <span class="font-bold text-[#1A1A80] group-hover:text-[#FF9933] transition flex items-center gap-0.5">
+                        مشاهده جزئیات
+                        <span>➔</span>
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <div class="col-span-full bg-white p-12 rounded-3xl text-center text-gray-400 text-sm border border-dashed border-gray-200 shadow-sm">
+            کسب‌وکاری در این دسته‌بندی یافت نشد.
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- بخش پیجینیشن (صفحه‌بندی) -->
+    {% if is_paginated %}
+    <div class="flex justify-center items-center gap-2 mt-10">
+        <!-- دکمه صفحه قبل -->
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 bg-white border border-gray-200 text-[#1A1A80] text-xs font-bold rounded-xl hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] transition shadow-sm">
+                قبلی
+            </a>
+        {% endif %}
+
+        <!-- شماره صفحات -->
+        <div class="flex items-center gap-1">
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <span class="w-9 h-9 flex items-center justify-center bg-[#FF9933] text-white text-xs font-black rounded-xl shadow-md">
+                        {{ num }}
+                    </span>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="w-9 h-9 flex items-center justify-center bg-white border border-gray-200 text-[#1A1A80] text-xs font-bold rounded-xl hover:border-[#FF9933] hover:text-[#FF9933] transition shadow-sm">
+                        {{ num }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- دکمه صفحه بعد -->
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 bg-white border border-gray-200 text-[#1A1A80] text-xs font-bold rounded-xl hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] transition shadow-sm">
+                بعدی
+            </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

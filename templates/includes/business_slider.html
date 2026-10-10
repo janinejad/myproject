@@ -15,46 +15,56 @@
 
     <div class="slider-track flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
         {% for business in top_businesses %}
-        <div class="snap-start w-[270px] md:w-[320px] flex-shrink-0 bg-white rounded-2xl border border-orange-100/80 shadow-sm hover:shadow-xl hover:border-[#FF9933]/40 transition duration-300 flex flex-col overflow-hidden group">
+        <!-- کل کارت به یک تگ <a> تبدیل شد تا کل باکس لینک داشته باشد -->
+        <a href="{{ business.get_absolute_url }}" class="snap-start w-[280px] md:w-[330px] flex-shrink-0 bg-white rounded-2xl border border-orange-100/80 shadow-sm hover:shadow-xl hover:border-[#FF9933]/50 transition duration-300 flex flex-col overflow-hidden group">
 
-            <div class="h-40 bg-slate-100 relative overflow-hidden">
+            <!-- بخش تصویر کاور و لوگو -->
+            <div class="h-44 bg-slate-100 relative overflow-hidden">
                 {% if business.cover_image %}
                     <img src="{{ business.cover_image.url }}" alt="{{ business.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 {% else %}
                     <div class="w-full h-full bg-gradient-to-tr from-slate-200 to-amber-50"></div>
                 {% endif %}
 
-                <div class="absolute top-3 right-3">
-                    <span class="bg-white/90 backdrop-blur-md text-[#1A1A80] text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
-                        {{ business.category.name }}
-                    </span>
+                <!-- برچسب دسته‌بندی (جلوگیری از تداخل لینک با استفاده از z-10 و relative) -->
+                <div class="absolute top-3 right-3 z-10">
+                    {% if business.category %}
+                        <!-- اگر روی دسته کلیک شد، به صفحه دسته برود، در غیر این صورت کلیک به کارت اصلی منتقل نشود -->
+                        <span onclick="event.stopPropagation(); window.location.href='{{ business.category.get_absolute_url }}';" class="bg-white/90 backdrop-blur-md text-[#1A1A80] text-xs font-bold px-3 py-1 rounded-full shadow-sm hover:text-[#FF9933] transition inline-block">
+                            {{ business.category.name }}
+                        </span>
+                    {% endif %}
                 </div>
 
-                <div class="absolute -bottom-4 right-4 w-12 h-12 rounded-xl border-2 border-white bg-white shadow-md overflow-hidden">
+                <div class="absolute -bottom-4 right-4 w-14 h-14 rounded-xl border-2 border-white bg-white shadow-md overflow-hidden z-10">
                     <img src="{{ business.logo.url|default:'/static/images/default-logo.png' }}" class="w-full h-full object-cover">
                 </div>
             </div>
 
-            <div class="p-5 pt-6 flex-1 flex flex-col justify-between">
+            <!-- بخش متن‌ها با اندازه‌های درشت‌تر -->
+            <div class="p-5 pt-7 flex-1 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-base font-bold text-[#1A1A80] group-hover:text-[#FF9933] transition line-clamp-1">
+                    <!-- عنوان درشت‌تر (text-lg) -->
+                    <h3 class="text-lg font-black text-[#1A1A80] group-hover:text-[#FF9933] transition line-clamp-1">
                         {{ business.title }}
                     </h3>
-                    <p class="text-gray-500 text-xs mt-1.5 line-clamp-2 leading-relaxed">
+                    <!-- توضیحات درشت‌تر و خواناتر (text-sm) -->
+                    <p class="text-gray-600 text-sm mt-2 line-clamp-2 leading-relaxed">
                         {{ business.description }}
                     </p>
                 </div>
 
-                <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                    <span class="truncate max-w-[170px]">📍 {{ business.address|truncatechars:22 }}</span>
-                    <a href="/businesses/{{ business.slug }}/" class="font-bold text-[#1A1A80] hover:text-[#FF9933] transition flex items-center gap-0.5">
+                <!-- آدرس و دکمه مشاهده با فونت درشت‌تر -->
+                <div class="mt-6 pt-3 border-t border-gray-100 flex items-center justify-between text-xs sm:text-sm text-gray-500">
+                    <span class="truncate max-w-[180px]">📍 {{ business.address|truncatechars:22 }}</span>
+                    <span class="font-bold text-[#1A1A80] group-hover:text-[#FF9933] transition flex items-center gap-1">
                         مشاهده
-                        <span>➔</span>
-                    </a>
+                        <span class="text-base">➔</span>
+                    </span>
                 </div>
             </div>
 
-        </div>
+        </a>
         {% empty %}
         <div class="w-full bg-white p-8 rounded-2xl border border-dashed border-gray-200 text-center text-gray-400 text-sm">
             کسب‌وکاری جهت نمایش وجود ندارد.

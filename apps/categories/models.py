@@ -4,7 +4,7 @@ from django.db import models
 from django.utils import timezone
 from imagekit.models import ProcessedImageField
 from pilkit.processors import ResizeToFill
-
+from django.urls import reverse
 from extensions.utils import get_filename_ext
 
 
@@ -27,8 +27,9 @@ class Category(models.Model):
     class Meta:
         ordering = ['order', 'name']
         verbose_name_plural = 'Categories'
-    # def get_abs_url(self):
-    #     return reverse(":products-search", kwargs={'cat_slug': self.slug})
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.name

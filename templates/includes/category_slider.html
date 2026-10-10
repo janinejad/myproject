@@ -1,55 +1,33 @@
 {% load static %}
 
-<!-- شناسه id="category-slider" به تگ section اصلی منتقل شد -->
 <section id="category-slider" class="container mx-auto px-4 lg:px-8 py-8 relative">
     <div class="flex justify-between items-center mb-6">
         <div>
             <span class="text-xs font-bold text-[#FF9933] uppercase">دسته‌بندی‌ها</span>
             <h2 class="text-xl md:text-2xl font-black text-[#1A1A80] mt-0.5">دسته‌بندی‌های محبوب مشاغل</h2>
         </div>
-        <!-- دکمه‌های ناوبری اسلایدر -->
         <div class="flex gap-2">
-            <button type="button"
-                    class="slider-prev bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">
-                ❮
-            </button>
-            <button type="button"
-                    class="slider-next bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">
-                ❯
-            </button>
+            <button type="button" class="slider-prev bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❮</button>
+            <button type="button" class="slider-next bg-white border border-gray-200 text-[#1A1A80] hover:bg-[#FF9933] hover:text-white hover:border-[#FF9933] w-9 h-9 rounded-xl shadow-sm flex items-center justify-center transition">❯</button>
         </div>
     </div>
 
-    <!-- Track اسلایدر -->
     <div class="slider-track flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 [scrollbar-width:none] [-ms-overflow-style:none] [::-webkit-scrollbar]:hidden">
         {% for cat in popular_categories %}
-            <a href="/categories/{{ cat.slug }}/"
-   class="snap-start w-[240px] min-h-[270px] flex-shrink-0
-          bg-white px-3 py-4 rounded-2xl
-          border border-orange-100/80
-          hover:border-[#FF9933]/50
-          shadow-sm hover:shadow-xl hover:shadow-orange-500/5
-          transition duration-300
-          flex flex-col items-center text-center group">
+            <!-- استفاده از get_absolute_url برای لینک دسته‌بندی -->
+            <a href="{{ cat.get_absolute_url }}"
+               class="snap-start w-[240px] min-h-[270px] flex-shrink-0 bg-white px-3 py-4 rounded-2xl border border-orange-100/80 hover:border-[#FF9933]/50 shadow-sm hover:shadow-xl hover:shadow-orange-500/5 transition duration-300 flex flex-col items-center text-center group">
 
-    <div class="w-[200px] h-[200px] shrink-0 rounded-full overflow-hidden
-                bg-gradient-to-br from-amber-50 to-orange-100/60
-                shadow-inner transition duration-300 group-hover:shadow-xl">
-        <img src="{{ cat.image.url }}"
-             alt="{{ cat.name }}"
-             class="w-full h-full rounded-full object-cover">
-    </div>
+                <div class="w-[200px] h-[200px] shrink-0 rounded-full overflow-hidden bg-gradient-to-br from-amber-50 to-orange-100/60 shadow-inner transition duration-300 group-hover:shadow-xl">
+                    <img src="{{ cat.image.url }}" alt="{{ cat.name }}" class="w-full h-full rounded-full object-cover">
+                </div>
 
-    <h3 class="w-full mt-4 text-lg font-black leading-7
-               text-[#1A1A80] group-hover:text-[#FF9933]
-               transition break-words">
-        {{ cat.name }}
-    </h3>
+                <h3 class="w-full mt-4 text-lg font-black leading-7 text-[#1A1A80] group-hover:text-[#FF9933] transition break-words">
+                    {{ cat.name }}
+                </h3>
 
-    <span class="mt-1 text-sm leading-6 text-gray-500">
-        مشاهده کسب‌وکارها
-    </span>
-</a>
+                <span class="mt-1 text-sm leading-6 text-gray-500">مشاهده کسب‌وکارها</span>
+            </a>
         {% empty %}
             <div class="w-full bg-white p-6 rounded-2xl border border-dashed border-gray-200 text-center text-gray-400 text-sm">
                 دسته‌بندی ثبت نشده است.
