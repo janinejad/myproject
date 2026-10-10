@@ -13,14 +13,19 @@ def upload_image_path(instance, filename):
     file_name = f"{timezone.now()}{ext}"
     return f"products/{datetime.today().year}/{datetime.today().month}/{file_name}"
 
+
 class Category(models.Model):
     name = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, unique=True, allow_unicode=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     icon = models.CharField(max_length=100, blank=True, help_text="SVG or Icon Class")
-    image = ProcessedImageField(upload_to=upload_image_path,format='WEBP', processors=[ResizeToFill(200, 200)],
+    image = ProcessedImageField(upload_to=upload_image_path, format='WEBP', processors=[ResizeToFill(200, 200)],
                                 verbose_name='تصویر شاخص',
                                 blank=True, null=True)
+
+    # فیلد جدید توضیحات دسته‌بندی
+    description = models.TextField(blank=True, null=True, verbose_name='توضیحات دسته‌بندی')
+
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 

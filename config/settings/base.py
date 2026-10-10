@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'mptt',
     'import_export',
+    'django_ckeditor_5',
     # Local Apps
     'apps.core',
     'apps.accounts',
@@ -104,4 +105,40 @@ JALALI_DATE_DEFAULTS = {
             ]
         }
     },
+}
+
+# تنظیمات کامل و پیشرفته CKEditor 5
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', '|',
+            'fontColor', 'fontBackgroundColor', 'fontSize', 'fontFamily', '|',
+            'alignment', '|',
+            'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent', '|',
+            'link', 'uploadImage', 'insertTable', 'blockQuote', 'codeBlock', 'mediaEmbed', '|',
+            'removeFormat', 'sourceEditing'
+        ],
+        'image': {
+            'toolbar': [
+                'imageTextAlternative', 'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', '|',
+                'toggleImageCaption'
+            ]
+        },
+        'table': {
+            'contentToolbar': [
+                'tableColumn', 'tableRow', 'mergeTableCells', 'tableCellProperties', 'tableProperties'
+            ]
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_h1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_h2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_h3'},
+                {'model': 'heading4', 'view': 'h4', 'title': 'Heading 4', 'class': 'ck-heading_h4'}
+            ]
+        },
+        'language': 'fa', # پشتیبانی کامل از زبان فارسی
+    }
 }

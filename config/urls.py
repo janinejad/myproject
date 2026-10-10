@@ -16,6 +16,7 @@ router.register(r'businesses', BusinessViewSet, basename='api-businesses')
 urlpatterns = [
     path('', include('apps.businesses.urls')),
     path('', include('apps.categories.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

@@ -32,7 +32,7 @@
     <style>
         body {
             background-color: #FDF8F3;
-            font-size: 16px; /* درشت‌تر شدن اندازه پایه فونت سایت */
+            font-size: 16px;
         }
     </style>
 </head>
@@ -53,12 +53,10 @@
             </div>
         </a>
 
-        <!-- Search Trigger Bar (دسکتاپ) -->
-        <div class="hidden md:flex flex-1 max-w-xl mx-6">
+        <!-- Search Trigger Bar (فقط در دسکتاپ بزرگتر از تبلت - lg) -->
+        <div class="hidden lg:flex flex-1 max-w-xl mx-6">
             <button type="button" onclick="openSearchModal()"
                     class="w-full bg-[#FDF8F3] hover:bg-white text-gray-500 hover:text-gray-700 text-base py-3 px-5 rounded-full border border-orange-200/80 focus:outline-none focus:border-[#FF9933] focus:ring-4 focus:ring-orange-500/10 transition-all flex items-center justify-between group shadow-inner">
-
-                <!-- سمت راست: آیکن و متن جستجو -->
                 <div class="flex items-center gap-3 min-w-0">
                     <svg class="w-5 h-5 text-gray-400 group-hover:text-[#FF9933] transition shrink-0" fill="none"
                          stroke="currentColor" viewBox="0 0 24 24">
@@ -67,8 +65,6 @@
                     </svg>
                     <span class="truncate text-sm sm:text-base font-medium">جستجوی هوشمند کسب‌وکار، کالا یا خدمت...</span>
                 </div>
-
-                <!-- سمت چپ: کلید میانبر -->
                 <span class="text-xs font-bold bg-white group-hover:bg-orange-50 text-gray-500 px-2.5 py-1 rounded-lg border border-gray-200 shrink-0">
                     Ctrl + K
                 </span>
@@ -78,9 +74,9 @@
         <!-- Header Actions -->
         <div class="flex items-center gap-2 sm:gap-4">
 
-            <!-- Mobile Search Icon Button (موبایل) -->
+            <!-- Mobile & Tablet Search Icon Button (نمایش در موبایل و تبلت تا سایز lg) -->
             <button type="button" onclick="openSearchModal()"
-                    class="md:hidden w-11 h-11 rounded-2xl bg-[#FDF8F3] border border-orange-200/80 text-[#1A1A80] flex items-center justify-center hover:bg-orange-50 active:scale-95 transition"
+                    class="lg:hidden w-11 h-11 rounded-2xl bg-[#FDF8F3] border border-orange-200/80 text-[#1A1A80] flex items-center justify-center hover:bg-orange-50 active:scale-95 transition"
                     title="جستجو">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -91,19 +87,19 @@
             <!-- Nav Links / User Profile Buttons -->
             <nav class="flex items-center gap-2 sm:gap-4">
                 <a href="/businesses/"
-                   class="hidden sm:inline-block text-base font-semibold text-gray-700 hover:text-[#1A1A80] px-3.5 py-2 rounded-xl hover:bg-orange-50 transition">
+                   class="hidden lg:inline-block text-base font-semibold text-gray-700 hover:text-[#1A1A80] px-3.5 py-2 rounded-xl hover:bg-orange-50 transition">
                     کسب‌وکارها
                 </a>
 
                 {% if user.is_authenticated %}
                     <!-- دکمه دسکتاپ -->
                     <a href="/profile/"
-                       class="hidden sm:inline-flex bg-[#1A1A80] text-white text-base font-bold px-6 py-3 rounded-2xl hover:bg-[#121260] shadow-sm hover:shadow-md transition whitespace-nowrap">
+                       class="hidden lg:inline-flex bg-[#1A1A80] text-white text-base font-bold px-6 py-3 rounded-2xl hover:bg-[#121260] shadow-sm hover:shadow-md transition whitespace-nowrap">
                         پنل کاربری
                     </a>
-                    <!-- آیکن موبایل پنل کاربری -->
+                    <!-- آیکن موبایل و تبلت پنل کاربری -->
                     <a href="/profile/"
-                       class="sm:hidden w-11 h-11 rounded-2xl bg-[#1A1A80] text-white flex items-center justify-center shadow-md active:scale-95 transition"
+                       class="lg:hidden w-11 h-11 rounded-2xl bg-[#1A1A80] text-white flex items-center justify-center shadow-md active:scale-95 transition"
                        title="پنل کاربری">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -112,7 +108,7 @@
                     </a>
                 {% else %}
                     <!-- دکمه‌های دسکتاپ -->
-                    <div class="hidden sm:flex items-center gap-3">
+                    <div class="hidden lg:flex items-center gap-3">
                         <a href="/login/"
                            class="text-base font-bold text-[#1A1A80] hover:text-[#FF9933] px-3.5 py-2 transition">
                             ورود
@@ -123,9 +119,9 @@
                         </a>
                     </div>
 
-                    <!-- آیکن‌های موبایل -->
+                    <!-- آیکن‌های موبایل و تبلت -->
                     <a href="/login/"
-                       class="sm:hidden w-11 h-11 rounded-2xl bg-[#FDF8F3] border border-orange-200/80 text-[#1A1A80] flex items-center justify-center hover:bg-orange-50 active:scale-95 transition"
+                       class="lg:hidden w-11 h-11 rounded-2xl bg-[#FDF8F3] border border-orange-200/80 text-[#1A1A80] flex items-center justify-center hover:bg-orange-50 active:scale-95 transition"
                        title="ورود به حساب">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -133,7 +129,7 @@
                         </svg>
                     </a>
                     <a href="/register/"
-                       class="sm:hidden w-11 h-11 rounded-2xl bg-[#FF9933] text-white flex items-center justify-center shadow-md shadow-orange-500/20 active:scale-95 transition"
+                       class="lg:hidden w-11 h-11 rounded-2xl bg-[#FF9933] text-white flex items-center justify-center shadow-md shadow-orange-500/20 active:scale-95 transition"
                        title="ثبت‌نام / ثبت کسب‌وکار">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -147,14 +143,10 @@
     </div>
 </header>
 
-<!-- Universal Smart Search Modal (موبایل: تمام‌صفحه | دسکتاپ: شناور و بلورین) -->
+<!-- Universal Smart Search Modal -->
 <div id="universalSearchModal" onclick="closeModalOnBackdrop(event)"
      class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex-col md:justify-start md:pt-16 transition-all duration-300">
-
-    <!-- Modal Dialog Box -->
     <div class="bg-[#FDF8F3] w-full h-full md:h-auto md:max-h-[85vh] md:max-w-3xl md:mx-auto md:rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-orange-100">
-
-        <!-- Modal Top Bar -->
         <div class="p-4 sm:p-5 bg-white border-b border-orange-100 flex items-center gap-3 shadow-sm">
             <form action="/search/" method="GET" class="flex-1 relative flex items-center">
                 <input type="text" id="globalSearchInput" name="q" placeholder="جستجوی نام کسب‌وکار، دسته‌بندی، کالا یا خدمت..."
@@ -177,10 +169,7 @@
             </button>
         </div>
 
-        <!-- Modal Content Body -->
         <div class="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
-
-            <!-- ۱. بخش جستجوهای اخیر (همیشه در بالا) -->
             <div id="recentSearchesSection" class="hidden mb-6">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="text-sm font-bold text-[#1A1A80] uppercase tracking-wider flex items-center gap-2">
@@ -194,7 +183,6 @@
                 <div id="recentSearchesContainer" class="flex flex-wrap gap-2.5"></div>
             </div>
 
-            <!-- بخش نتایج هوشمند لایو -->
             <div id="searchResultsSection">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-sm font-bold text-[#1A1A80] uppercase tracking-wider flex items-center gap-2">
@@ -202,14 +190,12 @@
                     </h3>
                     <span class="text-xs font-bold bg-orange-100 text-[#FF9933] px-2.5 py-1 rounded-lg">هوشمند</span>
                 </div>
-
                 <div id="searchResultsContainer" class="space-y-5">
                     <div class="p-8 text-center text-gray-400 text-sm">
                         عبارت مورد نظر خود را تایپ کنید...
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -222,8 +208,9 @@
 <!-- Footer -->
 <footer class="bg-white border-t border-orange-100/80 mt-20 pt-16 pb-10">
     <div class="container mx-auto px-4 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-100">
-            <div class="space-y-4 md:col-span-1">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 pb-12 border-b border-gray-100">
+            <!-- ستون اول: معرفی -->
+            <div class="space-y-4 lg:col-span-1">
                 <div class="flex items-center gap-2.5">
                     <div class="w-9 h-9 rounded-xl bg-[#FF9933] flex items-center justify-center text-white font-black text-xl">
                         ک
@@ -234,52 +221,110 @@
                     پلتفرم هوشمند معرفی، جستجو و ارتباط مستقیم با بهترین کسب‌وکارها، کالاها و خدمات سراسر کشور.
                 </p>
             </div>
+
+            <!-- ستون دوم: دسترسی سریع (آکاردئون در موبایل/تبلت، لیست در دسکتاپ) -->
             <div>
-                <h4 class="font-bold text-[#1A1A80] mb-4 text-base">دسترسی سریع</h4>
-                <ul class="space-y-3 text-sm sm:text-base text-gray-600">
-                    <li><a href="/businesses/" class="hover:text-[#FF9933] transition">لیست کسب‌وکارها</a></li>
-                    <li><a href="/categories/" class="hover:text-[#FF9933] transition">دسته‌بندی‌های مشاغل</a></li>
-                    <li><a href="/add-business/" class="hover:text-[#FF9933] transition">ثبت رایگان کسب‌وکار</a></li>
-                </ul>
+                <!-- نسخه موبایل و تبلت (کامبوباکس / آکاردئون) -->
+                <details class="group lg:hidden bg-orange-50/40 rounded-2xl p-3 border border-orange-100/60">
+                    <summary class="flex justify-between items-center font-bold text-[#1A1A80] cursor-pointer list-none text-base">
+                        <span>دسترسی سریع</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">▼</span>
+                    </summary>
+                    <ul class="space-y-3 text-sm sm:text-base text-gray-600 mt-3 pt-3 border-t border-orange-100/60">
+                        <li><a href="/businesses/" class="hover:text-[#FF9933] transition block">لیست کسب‌وکارها</a></li>
+                        <li><a href="/categories/" class="hover:text-[#FF9933] transition block">دسته‌بندی‌های مشاغل</a></li>
+                        <li><a href="/add-business/" class="hover:text-[#FF9933] transition block">ثبت رایگان کسب‌وکار</a></li>
+                    </ul>
+                </details>
+                <!-- نسخه دسکتاپ -->
+                <div class="hidden lg:block">
+                    <h4 class="font-bold text-[#1A1A80] mb-4 text-base">دسترسی سریع</h4>
+                    <ul class="space-y-3 text-sm sm:text-base text-gray-600">
+                        <li><a href="/businesses/" class="hover:text-[#FF9933] transition">لیست کسب‌وکارها</a></li>
+                        <li><a href="/categories/" class="hover:text-[#FF9933] transition">دسته‌بندی‌های مشاغل</a></li>
+                        <li><a href="/add-business/" class="hover:text-[#FF9933] transition">ثبت رایگان کسب‌وکار</a></li>
+                    </ul>
+                </div>
             </div>
+
+            <!-- ستون سوم: خدمات پرکاربرد (ستون جدید اضافه شده) -->
             <div>
-                <h4 class="font-bold text-[#1A1A80] mb-4 text-base">راهنما و قوانین</h4>
-                <ul class="space-y-3 text-sm sm:text-base text-gray-600">
-                    <li><a href="/about/" class="hover:text-[#FF9933] transition">درباره ما</a></li>
-                    <li><a href="/privacy/" class="hover:text-[#FF9933] transition">حریم خصوصی</a></li>
-                    <li><a href="/contact/" class="hover:text-[#FF9933] transition">تماس با پشتیبانی</a></li>
-                </ul>
+                <!-- نسخه موبایل و تبلت (کامبوباکس / آکاردئون) -->
+                <details class="group lg:hidden bg-orange-50/40 rounded-2xl p-3 border border-orange-100/60">
+                    <summary class="flex justify-between items-center font-bold text-[#1A1A80] cursor-pointer list-none text-base">
+                        <span>خدمات پرکاربرد</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">▼</span>
+                    </summary>
+                    <ul class="space-y-3 text-sm sm:text-base text-gray-600 mt-3 pt-3 border-t border-orange-100/60">
+                        <li><a href="/top-businesses/" class="hover:text-[#FF9933] transition block">برترین‌های ماه</a></li>
+                        <li><a href="/verified/" class="hover:text-[#FF9933] transition block">مشاغل تأییدشده</a></li>
+                        <li><a href="/special-offers/" class="hover:text-[#FF9933] transition block">پیشنهادهای ویژه</a></li>
+                    </ul>
+                </details>
+                <!-- نسخه دسکتاپ -->
+                <div class="hidden lg:block">
+                    <h4 class="font-bold text-[#1A1A80] mb-4 text-base">خدمات پرکاربرد</h4>
+                    <ul class="space-y-3 text-sm sm:text-base text-gray-600">
+                        <li><a href="/top-businesses/" class="hover:text-[#FF9933] transition">برترین‌های ماه</a></li>
+                        <li><a href="/verified/" class="hover:text-[#FF9933] transition">مشاغل تأییدشده</a></li>
+                        <li><a href="/special-offers/" class="hover:text-[#FF9933] transition">پیشنهادهای ویژه</a></li>
+                    </ul>
+                </div>
             </div>
+
+            <!-- ستون چهارم: راهنما و قوانین -->
             <div>
-                <h4 class="font-bold text-[#1A1A80] mb-4 text-base">صاحب کسب‌وکار هستید؟</h4>
-                <p class="text-sm text-gray-600 mb-4 leading-relaxed">کسب‌وکار و محصولات خود را کاملاً رایگان ثبت کنید و در معرض دید هزاران مشتری قرار بگیرید.</p>
+                <!-- نسخه موبایل و تبلت (کامبوباکس / آکاردئون) -->
+                <details class="group lg:hidden bg-orange-50/40 rounded-2xl p-3 border border-orange-100/60">
+                    <summary class="flex justify-between items-center font-bold text-[#1A1A80] cursor-pointer list-none text-base">
+                        <span>راهنما و قوانین</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180">▼</span>
+                    </summary>
+                    <ul class="space-y-3 text-sm sm:text-base text-gray-600 mt-3 pt-3 border-t border-orange-100/60">
+                        <li><a href="/about/" class="hover:text-[#FF9933] transition block">درباره ما</a></li>
+                        <li><a href="/privacy/" class="hover:text-[#FF9933] transition block">حریم خصوصی</a></li>
+                        <li><a href="/contact/" class="hover:text-[#FF9933] transition block">تماس با پشتیبانی</a></li>
+                    </ul>
+                </details>
+                <!-- نسخه دسکتاپ -->
+                <div class="hidden lg:block">
+                    <h4 class="font-bold text-[#1A1A80] mb-4 text-base">راهنما و قوانین</h4>
+                    <ul class="space-y-3 text-sm sm:text-base text-gray-600">
+                        <li><a href="/about/" class="hover:text-[#FF9933] transition">درباره ما</a></li>
+                        <li><a href="/privacy/" class="hover:text-[#FF9933] transition">حریم خصوصی</a></li>
+                        <li><a href="/contact/" class="hover:text-[#FF9933] transition">تماس با پشتیبانی</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ستون پنجم: ثبت کسب‌وکار -->
+            <div class="space-y-3">
+                <h4 class="font-bold text-[#1A1A80] text-base">صاحب کسب‌وکار هستید؟</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">کسب‌وکار خود را رایگان ثبت کنید و در معرض دید هزاران مشتری قرار دهید.</p>
                 <a href="/add-business/"
                    class="inline-flex items-center justify-center w-full bg-[#1A1A80] text-white text-sm font-bold py-3.5 rounded-2xl hover:bg-[#121260] transition shadow-sm">
                     + ثبت کسب‌وکار شما
                 </a>
             </div>
         </div>
+
         <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
             <p>© تمامی حقوق مادی و معنوی برای پلتفرم آسان‌گزین محفوظ است.</p>
         </div>
     </div>
 </footer>
 
-<!-- JavaScript Scripts for Modal, Search & Shortcuts -->
+<!-- JavaScript Scripts -->
 <script>
     let searchDebounceTimer;
 
     function openSearchModal() {
         const modal = document.getElementById('universalSearchModal');
         if (!modal) return;
-
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
-
-        // اول نمایش تاریخچه جستجوهای اخیر
         renderRecentSearches();
-
         setTimeout(() => {
             const input = document.getElementById('globalSearchInput');
             if (input) {
@@ -294,7 +339,6 @@
     function closeSearchModal() {
         const modal = document.getElementById('universalSearchModal');
         if (!modal) return;
-
         modal.classList.remove('flex');
         modal.classList.add('hidden');
         document.body.style.overflow = '';
@@ -306,7 +350,6 @@
         }
     }
 
-    // --- مدیریت جستجوهای اخیر در LocalStorage ---
     function getRecentSearches() {
         try {
             return JSON.parse(localStorage.getItem('recent_searches') || '[]');
@@ -359,7 +402,6 @@
         }
     }
 
-    // --- جستجوی لایو هوشمند بر اساس اولویت‌بندی درخواستی ---
     function handleLiveSearch(val) {
         clearTimeout(searchDebounceTimer);
         const query = val.trim();
@@ -392,7 +434,6 @@
 
         let html = '';
 
-        // ۱. اولویت اول نتایج: جستجو بر اساس کسب‌وکارها (Businesses)
         if (data.businesses && data.businesses.length > 0) {
             html += `
                 <div class="space-y-3 mb-6">
@@ -414,7 +455,6 @@
                 </div>`;
         }
 
-        // ۲. اولویت دوم نتایج: جستجو بر اساس دسته‌بندی‌ها (Categories با تصویر و عنوان مربعی)
         if (data.categories && data.categories.length > 0) {
             html += `
                 <div class="space-y-3 mb-6">
@@ -422,7 +462,6 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         ${data.categories.map(c => `
                             <a href="${c.url}" onclick="saveRecentSearch('${query}')" class="flex items-center gap-3 bg-white p-3 rounded-2xl border border-orange-100 hover:border-[#FF9933] transition shadow-sm group">
-                                <!-- تصویر مربعی گوشه‌گرد دسته‌بندی -->
                                 <div class="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 overflow-hidden border border-orange-100 text-2xl group-hover:scale-105 transition">
                                     ${c.image_url ? `<img src="${c.image_url}" class="w-full h-full object-cover">` : `<span>${c.icon || '🏢'}</span>`}
                                 </div>
@@ -436,7 +475,6 @@
                 </div>`;
         }
 
-        // ۳. اولویت سوم نتایج: کالاها و خدمات مرتبط (Catalog Items)
         if (data.catalog_items && data.catalog_items.length > 0) {
             html += `
                 <div class="space-y-3 mb-6">
@@ -460,7 +498,6 @@
         container.innerHTML = html;
     }
 
-    // میانبرهای کیبورد (Ctrl+K و Esc)
     document.addEventListener('keydown', function (e) {
         const isKKey = e.code === 'KeyK' || e.key.toLowerCase() === 'k' || e.key === 'ن';
         if ((e.ctrlKey || e.metaKey) && isKKey) {
